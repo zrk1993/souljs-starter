@@ -15,7 +15,6 @@ $ npm install
 ```bash
 # development
 $ npm run start
-npm run start:prod
 ```
 
 ## License
