@@ -19,4 +19,4 @@ $ npm run start
 
 ## License
 
-  Nest is [MIT licensed](LICENSE).
+  souljs is [MIT licensed](LICENSE).
