@@ -5,22 +5,30 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "start": "set EBUG=app* && ts-node -r tsconfig-paths/register src/main.ts",
+    "start:dev": "set EBUG=app* && nodemon",
+    "start:debug": "set EBUG=app* && nodemon --config nodemon-debug.json",
     "format": "prettier --write \"src/**/*.ts\"",
-    "start": "ts-node src/main.ts",
     "lint": "tslint -p tsconfig.json -c tslint.json"
   },
   "dependencies": {
     "joi": "^14.3.1",
     "koa": "^2.6.2",
-    "souljs": "^2.5.0"
+    "koa-logger": "^3.2.0",
+    "log4js": "^4.0.1",
+    "souljs": "^2.7.7"
   },
   "devDependencies": {
-    "@types/node": "^10.12.18",
-    "@types/joi": "^14.3.0",
+    "@types/joi": "^14.3.1",
     "@types/koa": "^2.0.48",
-    "prettier": "^1.15.3",
+    "@types/koa-logger": "^3.1.1",
+    "@types/log4js": "^2.3.5",
+    "@types/node": "^10.12.21",
+    "nodemon": "^1.18.9",
+    "prettier": "^1.16.3",
     "ts-node": "^7.0.1",
+    "tsconfig-paths": "^3.7.0",
     "tslint": "5.12.1",
-    "typescript": "^3.2.4"
+    "typescript": "^3.3.1"
   }
 }
