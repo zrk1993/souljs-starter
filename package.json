@@ -16,7 +16,7 @@
     "koa": "^2.6.2",
     "koa-logger": "^3.2.0",
     "log4js": "^4.0.1",
-    "souljs": "^2.7.7"
+    "souljs": "^2.8.1"
   },
   "devDependencies": {
     "@types/joi": "^14.3.1",
