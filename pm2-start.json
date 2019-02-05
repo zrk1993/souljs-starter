@@ -4,8 +4,8 @@
       "name": "soul-starter",
       "script": "./dist/main.js",
       "cwd": "./",
-      "error_file": "./log/pm2-website-err.log",
-      "out_file": "./log/pm2-website-out.log",
+      "error_file": "./pm2-website-err.log",
+      "out_file": "./pm2-website-out.log",
       "log_date_format": "YYYY-MM-DD HH:mm Z"
     }
   ]
