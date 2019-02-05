@@ -10,7 +10,7 @@ async function main() {
 
   app.use(koaLogger());
 
-  app.listen(8080);
+  app.listen(3001);
 }
 
 main();
