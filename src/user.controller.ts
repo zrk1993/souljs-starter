@@ -8,6 +8,6 @@ export default class User {
   @Get()
   @Render('index')
   index() {
-    return { content: logger };
+    return { content: JSON.stringify(process.env.NODE_ENV) };
   }
 }

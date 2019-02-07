@@ -6,8 +6,6 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
-    "start:dev": "nodemon",
-    "start:debug": "nodemon --config nodemon-debug.json",
     "format": "prettier --write \"src/**/*.?s\"",
     "lint": "tslint -p tsconfig.json -c tslint.json"
   },
@@ -24,7 +22,6 @@
     "@types/koa-logger": "^3.1.1",
     "@types/log4js": "^2.3.5",
     "@types/node": "^10.12.21",
-    "nodemon": "^1.18.9",
     "prettier": "^1.16.3",
     "ts-node": "^7.0.1",
     "tsconfig-paths": "^3.7.0",
