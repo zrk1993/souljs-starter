@@ -1,13 +1,11 @@
 import { Controller, Get, Render } from 'souljs';
-import getLogger from './utils/log4js';
-
-var logger = getLogger('main.ts');
+import config from './config';
 
 @Controller()
 export default class User {
   @Get()
   @Render('index')
   index() {
-    return { content: JSON.stringify(process.env.NODE_ENV) };
+    return { content: JSON.stringify(config) };
   }
 }

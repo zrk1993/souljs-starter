@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "start": "ts-node -r tsconfig-paths/register src/main.ts",
-    "format": "prettier --write \"src/**/*.?s\"",
+    "start": "set NODE_ENV=dev ts-node -r tsconfig-paths/register src/main.ts",
+    "format": "prettier --write \"src/**/*.?s\" \"config/*.?s\"",
     "lint": "tslint -p tsconfig.json -c tslint.json"
   },
   "dependencies": {
