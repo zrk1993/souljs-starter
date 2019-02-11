@@ -4,6 +4,7 @@
     "script": "./dist/main.js",
 
     "// Options reference": "https://pm2.io/doc/en/runtime/reference/ecosystem-file/",
+    "instances": "max",
     "error_file": "./log/pm2-website-err.log",
     "env": {
       "NODE_ENV": "development"
