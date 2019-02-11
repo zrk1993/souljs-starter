@@ -1,5 +1,5 @@
-import { SERVER_ENV } from '../enums';
+import { NODE_ENV } from '../enums';
 
 export default {
-  env: SERVER_ENV.prod,
+  env: NODE_ENV.prod,
 };

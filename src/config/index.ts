@@ -2,20 +2,20 @@ import defaultConfig from './config.default';
 import devConfig from './config.dev';
 import testConfig from './config.test';
 import prodConfig from './config.prod';
-import { SERVER_ENV } from '../enums';
+import { NODE_ENV } from '../enums';
 
 interface IConfig {
-  env: SERVER_ENV;
+  env: NODE_ENV;
   port: number;
 }
 
 let envConfig: any;
-const env = process.env.SERVER_ENV;
+const env = process.env.NODE_ENV;
 switch (env) {
-  case SERVER_ENV.dev:
+  case NODE_ENV.dev:
     envConfig = devConfig;
     break;
-  case SERVER_ENV.test:
+  case NODE_ENV.test:
     envConfig = testConfig;
     break;
   default:

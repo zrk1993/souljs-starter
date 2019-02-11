@@ -1,5 +1,5 @@
-export enum SERVER_ENV {
-  dev = 'dev',
+export enum NODE_ENV {
+  dev = 'development',
   test = 'test',
-  prod = 'prod',
+  prod = 'production',
 }
