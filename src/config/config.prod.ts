@@ -1,4 +1,4 @@
-import { SERVER_ENV } from '../src/enums';
+import { SERVER_ENV } from '../enums';
 
 export default {
   env: SERVER_ENV.prod,

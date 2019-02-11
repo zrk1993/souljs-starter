@@ -2,7 +2,7 @@ import defaultConfig from './config.default';
 import devConfig from './config.dev';
 import testConfig from './config.test';
 import prodConfig from './config.prod';
-import { SERVER_ENV } from '../src/enums';
+import { SERVER_ENV } from '../enums';
 
 interface IConfig {
   env: SERVER_ENV;

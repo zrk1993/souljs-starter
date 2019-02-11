@@ -1,7 +1,7 @@
 import { createApplication } from 'souljs';
 import * as koaLogger from 'koa-logger';
 import { SERVER_ENV } from './enums';
-import config from '../config';
+import config from './config';
 import getLogger from './utils/log4js';
 
 async function main() {
