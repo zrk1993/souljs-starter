@@ -8,7 +8,7 @@
         "name": "Current TS File",
         "type": "node",
         "request": "launch",
-        "env": { "SERVER_ENV":"dev" },
+        "env": { "NODE_ENV":"development" },
         "args": [
           "${workspaceRoot}/src/main.ts" // 入口文件
         ],
