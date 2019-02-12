@@ -5,7 +5,7 @@ import config from './config';
 import getLogger from './utils/log4js';
 
 async function main() {
-  const app = await createApplication(__dirname, '*.controller.ts', {
+  const app = await createApplication(__dirname, '*controller.ts', {
     logger: getLogger('app'),
     hbs: { disableCache: config.env === NODE_ENV.dev },
   });
