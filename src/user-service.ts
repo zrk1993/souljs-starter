@@ -5,7 +5,7 @@ class UserService {
   /**
    * 获取所有用户
    */
-  async getUsers() {
+  async getUsers(name: string) {
     const sql = `
     SELECT U.*, B.*, BU.*
     FROM t_user AS U

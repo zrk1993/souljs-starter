@@ -1,9 +1,20 @@
 export class ResultUtils {
-  static ok(msgOrData?: any): object;
-  static ok(msgOrData?: any, data?: object): object {
+  static success(msgOrData?: string | any, data?: object): object {
     if (data !== undefined || typeof msgOrData === 'string') {
-      return { code: 200, message: msgOrData, data };
+      return { code: 200, message: msgOrData || '操作成功！', data: data || null };
     }
-    return { code: 200, message: '', data: msgOrData || {} };
+    return { code: 200, message: '操作成功！', data: msgOrData || null };
+  }
+
+  static badRequest(message: string, data?: any) {
+    return { code: 400, message, data };
+  }
+
+  static forbidden(message: string) {
+    return { code: 403, message, data: null };
+  }
+
+  static internalServerError(message: string) {
+    return { code: 500, message, data: null };
   }
 }

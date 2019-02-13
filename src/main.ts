@@ -4,9 +4,10 @@ import { NODE_ENV } from './enums';
 import config from './config';
 import getLogger from './utils/log4js';
 import errorHandle from './middleware/error-handle';
+import session from './middleware/app-session';
 
 async function main() {
-  const app = await createApplication(__dirname, '*controller.ts', {
+  const app = await createApplication(__dirname, '/controller/*controller.ts', {
     logger: getLogger('app'),
     hbs: { disableCache: config.env === NODE_ENV.dev },
   });
@@ -15,7 +16,9 @@ async function main() {
     app.use(koaLogger());
   }
 
-  errorHandle(app);
+  app.use(session(app.getKoaInstance()));
+
+  app.use(errorHandle());
 
   app.listen(config.port);
 }
