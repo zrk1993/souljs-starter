@@ -1,4 +1,5 @@
 import * as db from './utils/db';
+import reCartesian from './utils/re-cartesian';
 
 class UserService {
   /**
@@ -6,22 +7,38 @@ class UserService {
    */
   async getUsers() {
     const sql = `
-    SELECT U.*, B.*
+    SELECT U.*, B.*, BU.*
     FROM t_user AS U
     LEFT JOIN pk_book_user AS BU ON U.user_id = BU.user_id
     LEFT JOIN t_book AS B ON B.book_id = BU.book_id`;
 
-    const structure = {
-      table: 'U',
-      primary_key: 'user_id',
-      includes: [{
-        table: 'B',
-        primary_key: 'book_id'
-      }]
-    };
-
     const results = await db.query({ sql, nestTables: true });
-    return results;
+
+    const data = reCartesian(results, {
+      table: 'U',
+      id: 'user_id',
+      hasOne: [
+        {
+          table: 'B',
+          as: 'book',
+          id: 'book_id',
+        },
+      ],
+      hasMany: [
+        {
+          table: 'B',
+          as: 'books',
+          id: 'book_id',
+        },
+        {
+          table: 'BU',
+          as: 'bus',
+          id: 'book_id',
+        },
+      ],
+    });
+
+    return data;
   }
 }
 
