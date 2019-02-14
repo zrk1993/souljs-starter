@@ -5,6 +5,7 @@ import config from './config';
 import getLogger from './utils/log4js';
 import errorHandle from './middleware/error-handle';
 import session from './middleware/app-session';
+import { appJwt } from './middleware/app-jwt';
 
 async function main() {
   const app = await createApplication(__dirname, '/controller/*controller.ts', {
@@ -17,6 +18,8 @@ async function main() {
   }
 
   app.use(session(app.getKoaInstance()));
+
+  app.use(appJwt());
 
   app.use(errorHandle());
 

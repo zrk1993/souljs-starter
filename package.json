@@ -12,9 +12,11 @@
   "dependencies": {
     "ioredis": "^4.6.2",
     "joi": "^14.3.1",
+    "jsonwebtoken": "^8.4.0",
     "koa": "^2.6.2",
     "koa-logger": "^3.2.0",
     "koa-session": "^5.10.1",
+    "koa-unless": "^1.0.7",
     "log4js": "^4.0.1",
     "mysql": "^2.16.0",
     "souljs": "^2.8.3"
@@ -22,6 +24,7 @@
   "devDependencies": {
     "@types/ioredis": "^4.0.6",
     "@types/joi": "^14.3.1",
+    "@types/jsonwebtoken": "^8.3.0",
     "@types/koa": "^2.0.48",
     "@types/koa-logger": "^3.1.1",
     "@types/koa-session": "^5.10.0",

@@ -7,7 +7,7 @@ export const redis = new Redis({
   host: '127.0.0.1',
   port: 6379,
   db: 1,
-  password: '123456',
+  retryStrategy: times => Math.min(times * 500, 2000),
 });
 
 redis.on('ready', () => {
