@@ -4,7 +4,10 @@
     "script": "./dist/main.js",
 
     "// Options reference": "https://pm2.io/doc/en/runtime/reference/ecosystem-file/",
+    "exec_mode": "cluster",
     "instances": "max",
+    "instance_var": "INSTANCE_ID",
+    "max_memory_restart": "1G",
     "error_file": "./log/pm2-website-err.log",
     "env": {
       "NODE_ENV": "development"

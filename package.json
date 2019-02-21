@@ -19,7 +19,7 @@
     "koa-unless": "^1.0.7",
     "log4js": "^4.0.1",
     "mysql": "^2.16.0",
-    "souljs": "^2.8.3"
+    "souljs": "^2.8.6"
   },
   "devDependencies": {
     "@types/ioredis": "^4.0.6",
