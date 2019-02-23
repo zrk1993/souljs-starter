@@ -14,7 +14,7 @@ export default () => {
         return (ctx.body = ResultUtils.badRequest(error.message));
       }
 
-      ResultUtils.internalServerError(error.message);
+      ctx.body = ResultUtils.internalServerError(error.message);
       logger.error('server error：', error);
     }
   };

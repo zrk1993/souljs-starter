@@ -13,11 +13,11 @@ export default class User {
   @Get()
   @Render('index')
   async index(@Ctx() ctx: Koa.Context) {
-    ctx.session.id = (ctx.session.id || 0) + 1;
+    // ctx.session.id = (ctx.session.id || 0) + 1;
     return { content: JSON.stringify(ctx.session) };
   }
 
-  @CronJob('* * * * * *')
+  @CronJob('5 * * * * *')
   cron() {
     logger.error(process.env.INSTANCE_ID);
   }

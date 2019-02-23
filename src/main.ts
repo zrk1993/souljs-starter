@@ -10,6 +10,7 @@ import { appJwt } from './middleware/app-jwt';
 async function main() {
   const app = await createApplication(__dirname, '/controller/*controller.ts', {
     logger: getLogger('app'),
+    staticAssets: { root: 'public', prefix: '/static' },
     hbs: { disableCache: config.env === NODE_ENV.dev },
   });
 
@@ -17,9 +18,9 @@ async function main() {
     app.use(koaLogger());
   }
 
-  app.use(session(app.getKoaInstance()));
+  // app.use(session(app.getKoaInstance()));
 
-  app.use(appJwt());
+  // app.use(appJwt());
 
   app.use(errorHandle());
 
