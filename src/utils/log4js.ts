@@ -31,7 +31,7 @@ const config = {
     http: { appenders: ['stdout', 'access'], level: 'DEBUG' },
   },
   pm2: true, // https://log4js-node.github.io/log4js-node/clustering.html
-  pm2InstanceVar: 'INSTANCE_ID'
+  pm2InstanceVar: 'INSTANCE_ID',
 };
 
 configure(config);
