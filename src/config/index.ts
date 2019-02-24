@@ -22,8 +22,9 @@ switch (env) {
   case NODE_ENV.test:
     envConfig = testConfig;
     break;
-  default:
+  case NODE_ENV.prod:
     envConfig = prodConfig;
+  default:
 }
 
 assignDeep(defaultConfig, envConfig);
