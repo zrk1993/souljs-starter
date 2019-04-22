@@ -21,9 +21,6 @@ class SoulOrm {
     public find(): object {
         return this.select()[0];
     }
-    public findOrFail(): object {
-        return this.select()[0];
-    }
   
     public insert(f: object): number
     public insert(d: object[])
