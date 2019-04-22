@@ -5,6 +5,7 @@ import userService from '../user-service';
 import { ResultUtils } from '../utils/result-utils';
 import { sign } from '../middleware/app-jwt';
 import getLogger from '../utils/log4js';
+import * as db from '../utils/db';
 
 const logger = getLogger('user-controller');
 
@@ -43,5 +44,20 @@ export default class User {
     const token = sign({ name: query.name });
     ctx.cookies.set('authorization', token, { httpOnly: true });
     return ResultUtils.success('ok', token);
+  }
+
+  @Get('/user_info2')
+  async addUser2(@Query() query: any) {
+    const users = await db.table('user').where({ id: 2 }).find();
+    const tx = await db.beginTx();
+    try {
+      await tx.table('user').insert({ name: 1 });
+      await tx.table('user').insert({ name: 1 });
+      await tx.table('user').insert({ name: 1 });
+      await tx.commit();
+    } catch (err) {
+      await tx.rollback();
+    }
+    return ResultUtils.success(users);
   }
 }
