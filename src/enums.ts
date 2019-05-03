@@ -3,3 +3,9 @@ export enum NODE_ENV {
   test = 'test',
   prod = 'production',
 }
+
+export enum SYS_ROLE {
+  admin = 'admin',
+  agent = 'agent',
+  merchant = 'merchant',
+}
