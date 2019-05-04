@@ -27,7 +27,11 @@ pool.query('SELECT 1', error => {
   }
 });
 
-export async function query(sql: string, values?: any | mysql.QueryOptions, options?: mysql.QueryOptions): Promise<any[]> {
+export async function query(
+  sql: string,
+  values?: any | mysql.QueryOptions,
+  options?: mysql.QueryOptions,
+): Promise<any[]> {
   let opt = null;
   if (arguments.length === 3) {
     opt = Object.assign(options, { sql: options, values });
@@ -107,7 +111,7 @@ export async function beginTx() {
       });
     },
     rollback: async () => {
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         conn.rollback(() => {
           conn.release();
           resolve();

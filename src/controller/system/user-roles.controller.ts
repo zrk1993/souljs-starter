@@ -6,14 +6,16 @@ import Role from '../../decorators/role';
 import CurUser from '../../decorators/cur-user';
 import { SYS_ROLE } from '../../../src/enums';
 
-@Controller('/user-roles')
+@Controller('/system/user-roles')
 @Role(SYS_ROLE.admin)
 export default class UserRoles {
   @Get('/list')
   @ApiDescription('用户的角色')
-  @QuerySchame(joi.object({
-    id: joi.string().required(),
-  }))
+  @QuerySchame(
+    joi.object({
+      id: joi.string().required(),
+    }),
+  )
   async list(@Query() query: any) {
     const sql = `
       SELECT R.id, R.code, R.name FROM role R
@@ -26,17 +28,22 @@ export default class UserRoles {
 
   @Post('/set-roles')
   @ApiDescription('分配角色')
-  @BodySchame(joi.object({
-    id: joi.string().required(),
-    roles: joi.array().items(joi.string()),
-  }))
+  @BodySchame(
+    joi.object({
+      id: joi.string().required(),
+      roles: joi.array().items(joi.string()),
+    }),
+  )
   async setRoles(@Body() body: any) {
     const id = body.id;
     const roles: any[] = body.roles;
-    
+
     const tx = await db.beginTx();
     try {
-      await tx.table('user_roles').where({ user_id: id }).delete();
+      await tx
+        .table('user_roles')
+        .where({ user_id: id })
+        .delete();
       if (roles.length) {
         await tx.table('user_roles').insert(roles.map((role_id: string) => ({ user_id: id, role_id })));
       }

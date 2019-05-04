@@ -1,4 +1,3 @@
-
 import { Use } from 'souljs';
 import * as Koa from 'koa';
 import { verify } from '../middleware/app-jwt';
