@@ -1,15 +1,14 @@
 /**
  * mysql关联查询的结果，可能是个笛卡尔积的形式，这种数据格式并不友好。
  * 这是个辅助工具，来改变这种状况, 要配合{ nestTables: true }使用
+ * kun
  * 2019-02-13
  */
 
 interface IStructure {
   table: string;
   id: string;
-  as?: string;
-  hasOne?: IStructure[];
-  hasMany?: IStructure[];
+  [k: string]: IStructure | IStructure[] | string;
 }
 
 /**
@@ -31,17 +30,14 @@ export default function reCartesian(dataList: any[], structure: IStructure, resu
     keyMap[key].push(row);
   });
 
-  const recursion = (strus: IStructure[] = [], type: string) => {
-    strus.forEach(stru => {
-      results.forEach(row => {
-        const data = reCartesian(row.groups(), stru);
-        row[stru.as || stru.table] = type === 'many' ? data : data[0];
-      });
+  Object.keys(structure).filter(k => !['table', 'id'].includes(k)).forEach((key) => {
+    const value = structure[key];
+    const stru: any = Array.isArray(value) ? value[0] : value;
+    results.forEach(row => {
+      const data = reCartesian(row.groups(), stru);
+      row[key] = Array.isArray(value) ? data : data[0];
     });
-  };
-
-  recursion(structure.hasMany, 'many');
-  recursion(structure.hasOne, 'one');
+  });
 
   return results;
 }

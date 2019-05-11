@@ -1,7 +1,7 @@
-import { Controller, Get, QuerySchame, Query, Post, BodySchame, Body, ApiDescription } from 'souljs';
+import { Controller, Get, QuerySchame, Query, Post, BodySchame, Body, Description } from 'souljs';
 import * as joi from 'joi';
 import { ResultUtils } from '../../utils/result-utils';
-import * as db from '../../utils/db';
+import db from '../../utils/db';
 import Role from '../../decorators/role';
 import CurUser from '../../decorators/cur-user';
 import { SYS_ROLE } from '../../../src/enums';
@@ -10,12 +10,10 @@ import { SYS_ROLE } from '../../../src/enums';
 @Role(SYS_ROLE.admin)
 export default class UserRoles {
   @Get('/list')
-  @ApiDescription('用户的角色')
-  @QuerySchame(
-    joi.object({
-      id: joi.string().required(),
-    }),
-  )
+  @Description('用户的角色')
+  @QuerySchame({
+    id: joi.string().required(),
+  })
   async list(@Query() query: any) {
     const sql = `
       SELECT R.id, R.code, R.name FROM role R
@@ -27,13 +25,11 @@ export default class UserRoles {
   }
 
   @Post('/set-roles')
-  @ApiDescription('分配角色')
-  @BodySchame(
-    joi.object({
-      id: joi.string().required(),
-      roles: joi.array().items(joi.string()),
-    }),
-  )
+  @Description('分配角色')
+  @BodySchame({
+    id: joi.string().required(),
+    roles: joi.array().items(joi.string()),
+  })
   async setRoles(@Body() body: any) {
     const id = body.id;
     const roles: any[] = body.roles;

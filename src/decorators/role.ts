@@ -1,7 +1,7 @@
 import { Use } from 'souljs';
 import * as Koa from 'koa';
 import { verify } from '../middleware/app-jwt';
-import * as db from '../utils/db';
+import db from '../utils/db';
 
 export default function Role(...roles: string[]) {
   return Use(async (ctx: Koa.Context, next: () => void) => {

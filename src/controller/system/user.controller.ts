@@ -1,9 +1,9 @@
-import { Controller, Get, QuerySchame, Query, Ctx, Post, BodySchame, Body, ApiDescription } from 'souljs';
+import { Controller, Get, QuerySchame, Query, Ctx, Post, BodySchame, Body, Description } from 'souljs';
 import * as joi from 'joi';
 import * as Koa from 'koa';
 import { SYS_ROLE } from '../../enums';
 import { ResultUtils } from '../../utils/result-utils';
-import * as db from '../../utils/db';
+import db from '../../utils/db';
 import md5 from '../../utils/md5';
 import uuid from '../../utils/uuid';
 import * as appJwt from '../../middleware/app-jwt';
@@ -12,15 +12,14 @@ import CurUser from '../../decorators/cur-user';
 import reCartesian from '../../utils/re-cartesian';
 
 @Controller('/system/user')
+@Description('用户')
 export default class User {
   @Post('/login')
-  @ApiDescription('用户登陆')
-  @BodySchame(
-    joi.object({
-      username: joi.string().required(),
-      password: joi.string().required(),
-    }),
-  )
+  @Description('用户登陆')
+  @BodySchame({
+    username: joi.string().required(),
+    password: joi.string().required(),
+  })
   async login(@Body() body: any, @Ctx() ctx: Koa.Context) {
     const where = {
       username: body.username,
@@ -40,7 +39,7 @@ export default class User {
   }
 
   @Get('/logout')
-  @ApiDescription('退出')
+  @Description('退出')
   async logout(@Ctx() ctx: Koa.Context) {
     ctx.cookies.set('authorization', '');
     return ResultUtils.success();
@@ -48,7 +47,7 @@ export default class User {
 
   @Get('/info')
   @Role(SYS_ROLE.admin, SYS_ROLE.agent, SYS_ROLE.merchant)
-  @ApiDescription('用户信息')
+  @Description('用户信息')
   async info(@CurUser() curUser: any) {
     const user = await db
       .table('user')
@@ -68,7 +67,7 @@ export default class User {
 
   @Get('/list')
   @Role(SYS_ROLE.admin)
-  @ApiDescription('用户信息')
+  @Description('用户列表')
   async list() {
     const sql = `
       SELECT U.id, U.username, U.enable, R.name as role_name, R.code as role_code FROM user U
@@ -80,26 +79,21 @@ export default class User {
     const users = reCartesian(results, {
       table: 'U',
       id: 'id',
-      hasMany: [
-        {
-          table: 'R',
-          as: 'roles',
-          id: 'role_id',
-        },
-      ],
+      roles: [{
+        table: 'R',
+        id: 'role_id',
+      }],
     });
     return ResultUtils.success(users);
   }
 
   @Post('/create')
   @Role(SYS_ROLE.admin)
-  @ApiDescription('创建用户')
-  @BodySchame(
-    joi.object({
-      username: joi.string().required(),
-      password: joi.string().required(),
-    }),
-  )
+  @Description('创建用户')
+  @BodySchame({
+    username: joi.string().required(),
+    password: joi.string().required(),
+  })
   async create(@Body() body: any) {
     const username = body.username;
     const password = md5(body.password);
@@ -122,12 +116,10 @@ export default class User {
 
   @Post('/remove')
   @Role(SYS_ROLE.admin)
-  @ApiDescription('删除')
-  @BodySchame(
-    joi.object({
-      id: joi.string().required(),
-    }),
-  )
+  @Description('删除')
+  @BodySchame({
+    id: joi.string().required(),
+  })
   async remove(@Body() body: any) {
     const id = body.id;
     const tx = await db.beginTx();
@@ -135,7 +127,7 @@ export default class User {
       await tx
         .table('user')
         .where({ id })
-        .delete(1);
+        .delete();
       await tx
         .table('user_roles')
         .where({ user_id: id })
@@ -150,12 +142,10 @@ export default class User {
 
   @Post('/enable')
   @Role(SYS_ROLE.admin)
-  @ApiDescription('启用用户')
-  @BodySchame(
-    joi.object({
-      id: joi.string().required(),
-    }),
-  )
+  @Description('启用用户')
+  @BodySchame({
+    id: joi.string().required(),
+  })
   async enable(@Body() body: any) {
     const id = body.id;
     await db
@@ -167,12 +157,10 @@ export default class User {
 
   @Post('/disable')
   @Role(SYS_ROLE.admin)
-  @ApiDescription('启用用户')
-  @BodySchame(
-    joi.object({
-      id: joi.string().required(),
-    }),
-  )
+  @Description('启用用户')
+  @BodySchame({
+    id: joi.string().required(),
+  })
   async disable(@Body() body: any) {
     const id = body.id;
     await db

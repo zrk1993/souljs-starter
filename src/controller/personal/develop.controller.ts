@@ -1,6 +1,6 @@
-import { Controller, Get, ApiDescription } from 'souljs';
+import { Controller, Get, Description } from 'souljs';
 import { ResultUtils } from '../../utils/result-utils';
-import * as db from '../../utils/db';
+import db from '../../utils/db';
 import Role from '../../decorators/role';
 import CurUser from '../../decorators/cur-user';
 import { SYS_ROLE } from '../../../src/enums';
@@ -9,10 +9,10 @@ import { SYS_ROLE } from '../../../src/enums';
 @Role(SYS_ROLE.merchant)
 export default class DevelopController {
   @Get('/secret')
-  @ApiDescription('开发参数')
+  @Description('开发参数')
   async secret(@CurUser() curUser: any) {
     const merchant = await db
-      .table('merchant')
+      .table('uesr')
       .where({ user_id: curUser.id })
       .find();
     return ResultUtils.success({
