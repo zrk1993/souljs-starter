@@ -79,10 +79,12 @@ export default class User {
     const users = reCartesian(results, {
       table: 'U',
       id: 'id',
-      roles: [{
-        table: 'R',
-        id: 'role_id',
-      }],
+      roles: [
+        {
+          table: 'R',
+          id: 'role_id',
+        },
+      ],
     });
     return ResultUtils.success(users);
   }

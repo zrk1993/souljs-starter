@@ -30,14 +30,16 @@ export default function reCartesian(dataList: any[], structure: IStructure, resu
     keyMap[key].push(row);
   });
 
-  Object.keys(structure).filter(k => !['table', 'id'].includes(k)).forEach((key) => {
-    const value = structure[key];
-    const stru: any = Array.isArray(value) ? value[0] : value;
-    results.forEach(row => {
-      const data = reCartesian(row.groups(), stru);
-      row[key] = Array.isArray(value) ? data : data[0];
+  Object.keys(structure)
+    .filter(k => !['table', 'id'].includes(k))
+    .forEach(key => {
+      const value = structure[key];
+      const stru: any = Array.isArray(value) ? value[0] : value;
+      results.forEach(row => {
+        const data = reCartesian(row.groups(), stru);
+        row[key] = Array.isArray(value) ? data : data[0];
+      });
     });
-  });
 
   return results;
 }
