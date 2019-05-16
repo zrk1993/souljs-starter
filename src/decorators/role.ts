@@ -1,10 +1,10 @@
-import { Use } from 'souljs';
+import { Use, Description } from 'souljs';
 import * as Koa from 'koa';
 import { verify } from '../middleware/app-jwt';
 import db from '../utils/db';
 
 export default function Role(...roles: string[]) {
-  return Use(async (ctx: Koa.Context, next: () => void) => {
+  const role = Use(async (ctx: Koa.Context, next: () => void) => {
     const signData = await verify(ctx);
     ctx.state.curUser = signData;
     const sql = `
@@ -19,4 +19,11 @@ export default function Role(...roles: string[]) {
       throw new Error('no authorization!');
     }
   });
+
+  const description = Description(`【${roles.join()}】`);
+
+  return (target: any, propertyKey?: string) => {
+    role(target, propertyKey);
+    description(target, propertyKey);
+  };
 }

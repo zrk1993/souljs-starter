@@ -31,7 +31,7 @@ export default function reCartesian(dataList: any[], structure: IStructure, resu
   });
 
   Object.keys(structure)
-    .filter(k => !['table', 'id'].includes(k))
+    .filter(k => !['table', 'id'].find(it => k === it))
     .forEach(key => {
       const value = structure[key];
       const stru: any = Array.isArray(value) ? value[0] : value;

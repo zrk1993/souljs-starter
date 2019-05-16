@@ -1,4 +1,4 @@
-import { Controller, Get, QuerySchame, Query, Ctx, Post, BodySchame, Body, Description } from 'souljs';
+import { Controller, Get, QuerySchame, Query, Ctx, Post, BodySchame, Body, Description, Tag } from 'souljs';
 import * as joi from 'joi';
 import * as Koa from 'koa';
 import { SYS_ROLE } from '../../enums';
@@ -46,8 +46,8 @@ export default class User {
   }
 
   @Get('/info')
-  @Role(SYS_ROLE.admin, SYS_ROLE.agent, SYS_ROLE.merchant)
   @Description('用户信息')
+  @Role(SYS_ROLE.admin, SYS_ROLE.agent, SYS_ROLE.merchant)
   async info(@CurUser() curUser: any) {
     const user = await db
       .table('user')

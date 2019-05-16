@@ -1,4 +1,4 @@
-import { Controller, Get, QuerySchame, Query, Post, BodySchame, Body, Description } from 'souljs';
+import { Controller, Get, QuerySchame, Query, Post, BodySchame, Body, Description, Tag } from 'souljs';
 import * as joi from 'joi';
 import { ResultUtils } from '../../utils/result-utils';
 import db from '../../utils/db';
