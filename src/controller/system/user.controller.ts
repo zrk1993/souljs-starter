@@ -26,8 +26,7 @@ export default class User {
       password: md5(body.password),
       enable: 1,
     };
-    const user = await db
-      .table('user')
+    const user = await db.table('user')
       .where(where)
       .find();
     const token = appJwt.sign({
