@@ -36,10 +36,7 @@ export default class UserRoles {
 
     const tx = await db.beginTx();
     try {
-      await tx
-        .table('user_roles')
-        .where({ user_id: id })
-        .delete();
+      await tx.table('user_roles').where({ user_id: id }).delete();
       if (roles.length) {
         await tx.table('user_roles').insert(roles.map((role_id: string) => ({ user_id: id, role_id })));
       }

@@ -24,10 +24,7 @@ export default class RoleController {
   })
   async info(@Query() query: any) {
     const id = query.id;
-    const role = await db
-      .table('role')
-      .where({ id })
-      .find();
+    const role = await db.table('role').where({ id }).find();
     return ResultUtils.success(role);
   }
 
@@ -59,10 +56,7 @@ export default class RoleController {
     const id = body.id;
     const code = body.code;
     const name = body.name;
-    await db
-      .table('role')
-      .where({ id })
-      .update({ code, name });
+    await db.table('role').where({ id }).update({ code, name });
     return ResultUtils.success();
   }
 
@@ -75,14 +69,8 @@ export default class RoleController {
     const id = body.id;
     const tx = await db.beginTx();
     try {
-      await tx
-        .table('user_roles')
-        .where({ role_id: id })
-        .delete();
-      await tx
-        .table('role')
-        .where({ id })
-        .delete();
+      await tx.table('user_roles').where({ role_id: id }).delete();
+      await tx.table('role').where({ id }).delete();
       await tx.commit();
     } catch (error) {
       await tx.rollback();
@@ -97,10 +85,7 @@ export default class RoleController {
   })
   async enable(@Body() body: any) {
     const id = body.id;
-    await db
-      .table('role')
-      .where({ id })
-      .update({ enable: 1 });
+    await db.table('role').where({ id }).update({ enable: 1 });
     return ResultUtils.success();
   }
 
@@ -111,10 +96,7 @@ export default class RoleController {
   })
   async disable(@Body() body: any) {
     const id = body.id;
-    await db
-      .table('role')
-      .where({ id })
-      .update({ enable: 0 });
+    await db.table('role').where({ id }).update({ enable: 0 });
     return ResultUtils.success();
   }
 }

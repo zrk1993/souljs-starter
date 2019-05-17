@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
-    "lint": "tslint -p tsconfig.json -c tslint.json"
+    "lint": "tslint --fix -p tsconfig.json -c tslint.json"
   },
   "dependencies": {
     "assign-deep": "^1.0.0",

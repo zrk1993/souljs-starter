@@ -1,10 +1,11 @@
 import * as jwt from 'jsonwebtoken';
 import * as Koa from 'koa';
+import * as moment from 'moment';
 import unless = require('koa-unless');
 // import { redis } from '../utils/redis';
 import { ResultUtils } from '../utils/result-utils';
 
-const secret = 'hahahahahah';
+const secret = 'hahahahahah' + moment().format('YYYYMMDD');
 
 export const sign = (data: any): string => {
   const token = jwt.sign(data, secret, { expiresIn: '2h' });
@@ -14,7 +15,7 @@ export const sign = (data: any): string => {
 export const verify = (ctx: Koa.Context): Promise<string | any> => {
   return new Promise((resolve, reject) => {
     const token = ctx.header.authorization || ctx.cookies.get('authorization');
-    jwt.verify(token, secret, (error, decoded) => {
+    jwt.verify(token, secret, (error: Error, decoded: any) => {
       error ? reject(error) : resolve(decoded);
     });
   });
