@@ -4,6 +4,8 @@ souljs-starter
 
 [souljs](https://github.com/my-soul/souljs) framework TypeScript starter repository.
 
+[soul-orm](https://github.com/my-soul/soul-orm) mysql toolkit
+
 ## Installation
 
 ```bash
