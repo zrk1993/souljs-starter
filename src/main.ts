@@ -20,4 +20,8 @@ async function main() {
   app.listen(config.port);
 }
 
+process.on('rejectionHandled', console.error);
+process.on('uncaughtException', console.error);
+process.on('warning', console.error);
+
 main();

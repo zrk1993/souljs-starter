@@ -1,4 +1,5 @@
 import { Use, Description } from 'souljs';
+import * as assert from 'assert';
 import * as Koa from 'koa';
 import { verify } from '../middleware/app-jwt';
 import db from '../utils/db';
@@ -20,6 +21,7 @@ export default function Role(...roles: string[]) {
     }
   });
 
+  assert.equal(1, 2);
   const description = Description(`【${roles.join()}】`);
 
   return (target: any, propertyKey?: string) => {
