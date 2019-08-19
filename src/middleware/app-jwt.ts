@@ -8,15 +8,27 @@ import { ResultUtils } from '../utils/result-utils';
 const secret = 'hahahahahah' + moment().format('YYYYMMDD');
 
 export const sign = (data: any): string => {
-  const token = jwt.sign(data, secret, { expiresIn: '2h' });
+  const token = jwt.sign(data, secret, { expiresIn: '6h' });
   return token;
+};
+
+const JWTTokenError = {
+  TokenExpiredError: '登录过期,请重新登录！',
+  JsonWebTokenError: '权限验证失败，请重新登录！',
+  NotBeforeError: 'jwt not active！',
 };
 
 export const verify = (ctx: Koa.Context): Promise<string | any> => {
   return new Promise((resolve, reject) => {
     const token = ctx.header.authorization || ctx.cookies.get('authorization');
     jwt.verify(token, secret, (error: Error, decoded: any) => {
-      error ? reject(error) : resolve(decoded);
+      if (error) {
+        error.message = JWTTokenError[error.name];
+        error.name = 'JWTTokenError';
+        reject(error);
+      } else {
+        resolve(decoded)
+      }
     });
   });
 };
