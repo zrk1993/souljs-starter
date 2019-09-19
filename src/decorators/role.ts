@@ -15,13 +15,12 @@ export default function Role(...roles: string[]) {
     `;
     const userRoles = await db.query(sql, [signData.id]);
     if (roles.some(r => userRoles.find(ur => ur.code === r))) {
-      await next();
+      next();
     } else {
       throw new Error('no authorization!');
     }
   });
 
-  assert.equal(1, 2);
   const description = Description(`【${roles.join()}】`);
 
   return (target: any, propertyKey?: string) => {

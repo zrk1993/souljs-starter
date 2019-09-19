@@ -8,7 +8,7 @@ import { SYS_ROLE } from '../../../src/enums';
 
 @Controller('/system/user-roles')
 @Role(SYS_ROLE.admin)
-export default class UserRoles {
+export class UserRoles {
   @Get('/list')
   @Description('用户的角色')
   @QuerySchame({

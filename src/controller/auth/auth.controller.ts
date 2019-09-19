@@ -13,7 +13,7 @@ import reCartesian from '../../utils/re-cartesian';
 
 @Controller('/auth')
 @Description('auth')
-export default class Auth {
+export class Auth {
   @Post('/login')
   @Description('用户登陆')
   @BodySchame({

@@ -9,7 +9,7 @@ import Role from '../../decorators/role';
 
 @Controller('/system/role')
 @Role(SYS_ROLE.admin)
-export default class RoleController {
+export class RoleController {
   @Get('/list')
   @Description('角色列表')
   async list() {

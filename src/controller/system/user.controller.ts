@@ -13,7 +13,7 @@ import reCartesian from '../../utils/re-cartesian';
 
 @Controller('/system/user')
 @Description('用户管理')
-export default class User {
+export class User {
   @Get('/list')
   @Role(SYS_ROLE.admin)
   @Description('用户列表')

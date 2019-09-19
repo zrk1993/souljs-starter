@@ -3,12 +3,12 @@ import * as koaLogger from 'koa-logger';
 import config from './config';
 import getLogger from './utils/log4js';
 import errorHandle from './middleware/error-handle';
+import * as router from './router';
 import { NODE_ENV } from '../src/enums';
 
 async function main() {
-  const app = await createApplication(__dirname, '/controller/**/*controller.ts', {
+  const app = await createApplication(__dirname, Object.keys(router).map(k => router[k]), {
     logger: getLogger('app'),
-    hbs: { disableCache: config.env === NODE_ENV.dev },
   });
 
   if (config.env === NODE_ENV.dev) {
@@ -19,9 +19,5 @@ async function main() {
 
   app.listen(config.port);
 }
-
-process.on('rejectionHandled', console.error);
-process.on('uncaughtException', console.error);
-process.on('warning', console.error);
 
 main();
